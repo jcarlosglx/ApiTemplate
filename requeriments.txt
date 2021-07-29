@@ -1,0 +1,18 @@
+# Base requirements
+black
+coverage
+flake8
+gunicorn
+isort
+pre-commit
+pytest
+
+# Project requirements
+flask
+flask-sqlalchemy
+flask-marshmallow
+Flask-Script
+requests
+psycop2
+SQLAlchemy-serializar
+apscheduler
