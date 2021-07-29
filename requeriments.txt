@@ -13,6 +13,6 @@ flask-sqlalchemy
 flask-marshmallow
 Flask-Script
 requests
-psycop2
-SQLAlchemy-serializar
+psycopg2-binary
+SQLAlchemy-serializer
 apscheduler
