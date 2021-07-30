@@ -17,5 +17,6 @@ def get_dummy_record(n: int, some_class):
         elif isinstance(type_column, DateTime):
             setattr(new_record, key, datetime.now())
         else:
-            print(f"Enable to set a default value for {type_column}")
+            if key != "id":
+                print(f"Enable to set a default value for {type_column}")
     return new_record
