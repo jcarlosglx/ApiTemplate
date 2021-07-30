@@ -8,7 +8,7 @@ pre-commit
 pytest
 
 # Project requirements
-flask
+flask==1.1.4
 flask-sqlalchemy
 flask-marshmallow
 Flask-Script

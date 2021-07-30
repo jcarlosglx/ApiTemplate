@@ -1,12 +1,11 @@
-from app.models.baseModel import BaseModel
 from app.models import db
 
 
-class LogModel(BaseModel):
+class LogModel(db.Model):
     __tablename__ = "log_model"
     __table_args__ = {"extend_existing": True}
-    serializer_rules = ()
 
+    id = db.Column(db.Integer, primary_key=True)
     table_db = db.Column(db.String(255))
     method_access = db.Column(db.String(10))
     incomming_data = db.Column(db.Text())
