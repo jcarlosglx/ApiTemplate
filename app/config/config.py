@@ -1,10 +1,9 @@
 from os import environ
 from dataclasses import dataclass
-from os.path import join, abspath
+from os.path import join, abspath, dirname
 
-base_dir = abspath(__file__)
+base_dir = abspath(dirname(__file__))
 base_db = join(base_dir, "base.db")
-
 
 @dataclass
 class BaseConfig(object):
