@@ -15,7 +15,7 @@ class Middleware:
     def __call__(self, environ, start_response):
         try:
             with self.app.test_request_context():
-                is_trackable = environ["REQUEST_PATH"] != "GET"
+                is_trackable = environ["REQUEST_METHOD"] != "GET"
                 if is_trackable:
                     log = self.get_commited_log()
                     self.set_request_info(log, environ)

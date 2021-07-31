@@ -4,13 +4,15 @@ from flask import Flask
 from apscheduler.schedulers.background import BackgroundScheduler
 from app.messages.statusMessages import STATUS_200
 from app.models.logModel import LogModel
+from app import get_config_server
 from app.models import db
 
 
 class HealthCheckServer:
-    def __init__(self, instance: Flask, ip: str = "localhost", port: str = "8080", sec: int = 100):
-        self.ip = ip
-        self.port = port
+    def __init__(self, instance: Flask):
+        config = get_config_server()
+        self.ip = config.HOST
+        self.port = config.PORT
         self.schedule = BackgroundScheduler(deamon=True)
         self.prefix = instance.config["APPLICATION_ROOT"]
         self.instance = instance
@@ -18,7 +20,7 @@ class HealthCheckServer:
         self.schedule.add_job(
             func=HealthCheckServer.health_check_server,
             trigger="interval",
-            seconds=sec,
+            seconds=config.TIME_WAKE_SEC,
             args=[self.ip, self.port, self.instance, self.prefix],
             id="deamon_server"
         )

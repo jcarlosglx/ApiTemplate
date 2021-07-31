@@ -1,40 +1,25 @@
 from app.models import db
 from app.helpers.records.createRecords import create_records
-from app import create_app
-from os import environ
+from app import create_app, get_config_app, get_config_server, check_connection_db
 from flask_script import Manager
 from app.routes.blueprints import load_blueprints
 from app.models import load_models
 from app.services.healthCheckServer import HealthCheckServer
 
 
-def check_connection_db() -> bool:
-    try:
-        db.session.execute("SELECT 1")
-        return True
-    except Exception as error:
-        return False
-
-
-def get_configuration() -> str:
-    type_configuration = "DEV"
-    if environ.get("PATH_DB"):
-        type_configuration = "DEPLOY"
-    return type_configuration
-
-
-type_config = get_configuration()
-instance = create_app(type_config)
+type_config_app = get_config_app()
+instance = create_app()
 manager_commands = Manager(instance)
-scheduler = HealthCheckServer(instance, sec=120)
+scheduler = HealthCheckServer(instance)
 
 
 @manager_commands.command
-def run_server(debug=False):
+def run_server():
+    config = get_config_server()
     load_blueprints(instance)
     is_alive_db = check_connection_db()
     if is_alive_db:
-        instance.run(debug=debug)
+        instance.run(host=config.HOST, port=config.PORT, debug=config.DEBUG)
     else:
         print("Unable to connect with the database")
 
