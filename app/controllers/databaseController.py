@@ -1,11 +1,12 @@
 from app.models import db, load_models
 from app.helpers.records.createRecords import create_records
 from app.messages.returnMessages import MessageReturn
+from flask import Response
 
 
 class DatabaseController:
 
-    def create_database(self):
+    def create_database(self) -> Response:
         try:
             load_models()
             db.create_all()
@@ -15,7 +16,7 @@ class DatabaseController:
             db.session.rollback()
             return MessageReturn().error_id_not_found()
 
-    def delete_database(self):
+    def delete_database(self) -> Response:
         try:
             for table in db.metadata.tables.keys():
                 db.session.execute(f"TRUNCATE TABLE {table} CASCADE")

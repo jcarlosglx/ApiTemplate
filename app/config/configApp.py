@@ -34,7 +34,7 @@ class DeployConfig(BaseConfig):
     APPLICATION_ROOT = "/api"
 
 
-configurations = {
+config_app = {
     "DEV": DevConfig,
     "DEPLOY": DeployConfig
 }
