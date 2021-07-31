@@ -7,6 +7,7 @@ class ServerConfig:
     HOST = "0.0.0.0"
     PORT = 8080
     TIME_WAKE_SEC = 8
+    HEALTH_CHEK_SEC = 10
     DEBUG = True
 
 
