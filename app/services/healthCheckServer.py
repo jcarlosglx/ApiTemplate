@@ -5,6 +5,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from app.messages.statusMessages import STATUS_200
 from app.models.logModel import LogModel
 from app import get_config_server
+from app.config.configEndpoint import EndpointConfig
 from app.models import db
 
 
@@ -16,12 +17,13 @@ class HealthCheckServer:
         self.schedule = BackgroundScheduler(deamon=True)
         self.prefix = instance.config["APPLICATION_ROOT"]
         self.instance = instance
+        self.endpoint = EndpointConfig.endpoint_health_check_server
 
         self.schedule.add_job(
             func=HealthCheckServer.health_check_server,
             trigger="interval",
             seconds=config.HEALTH_CHEK_SEC,
-            args=[self.ip, self.port, self.instance, self.prefix],
+            args=[self.ip, self.port, self.instance, self.prefix, self.endpoint],
             id="deamon_server"
         )
         self.schedule.start()
@@ -49,10 +51,11 @@ class HealthCheckServer:
             print(f"Error: {error}")
 
     @staticmethod
-    def health_check_server(ip: str, port: str, app: Flask, prefix: str):
+    def health_check_server(ip: str, port: str, app: Flask, prefix: str, endpoint: str):
         try:
             with app.test_request_context():
-                url_server = f"http://{ip}:{port}{prefix}/health_check_server"
+                url_server = f"http://{ip}:{port}{prefix}{endpoint}"
+                print(url_server)
                 response_server = requests.get(f"{url_server}")
                 data_json = response_server.json()
                 if data_json["status"] != STATUS_200:

@@ -15,7 +15,7 @@ class ServerConfig:
 class ServerDevConfig(ServerConfig):
     HOST = "0.0.0.0"
     PORT = 8080
-    DEBUG = True
+    DEBUG = False
 
 
 @dataclass
