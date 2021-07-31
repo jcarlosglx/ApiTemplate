@@ -19,7 +19,7 @@ class MessageReturn:
         response._status = self.status
         return response
 
-    def custom_return_message(self, data: str, message: str, status: int) -> Response:
+    def custom_return_message(self, data: str, message: str, status: str) -> Response:
         self.data = data
         self.status = status
         self.message = message

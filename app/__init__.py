@@ -10,7 +10,6 @@ from app.config.configServer import config_server, ServerConfig
 
 def create_app() -> Flask:
     app = Flask(__name__)
-    app.url_map.strict_slashes = False
     config = get_config_app()
     app.config.from_object(config)
     db.init_app(app)
