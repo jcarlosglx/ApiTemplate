@@ -20,7 +20,7 @@ class HealthCheckServer:
         self.schedule.add_job(
             func=HealthCheckServer.health_check_server,
             trigger="interval",
-            seconds=config.TIME_WAKE_SEC,
+            seconds=config.HEALTH_CHEK_SEC,
             args=[self.ip, self.port, self.instance, self.prefix],
             id="deamon_server"
         )
