@@ -6,7 +6,7 @@ from app.models import db
 
 
 def create_records(size: int):
-    for n in range(1, size+1):
+    for n in range(1, size + 1):
         new_log = get_dummy_record(n, LogModel)
         db.session.add(new_log)
         db.session.commit()

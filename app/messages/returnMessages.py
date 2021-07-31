@@ -11,11 +11,7 @@ class MessageReturn:
     data = None
 
     def return_message(self) -> Response:
-        response = jsonify(
-            data=self.data,
-            status=self.status,
-            message=self.message
-        )
+        response = jsonify(data=self.data, status=self.status, message=self.message)
         response._status = self.status
         return response
 

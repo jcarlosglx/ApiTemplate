@@ -6,7 +6,6 @@ from app.exceptions.handler import HandlerError
 
 
 class Middleware:
-
     def __init__(self, app):
         self.wsgi_app = app.wsgi_app
         self.app = app
@@ -69,6 +68,7 @@ class Middleware:
     def set_request_info(self, new_log, environ):
         with self.app.test_request_context():
             from werkzeug.wrappers import Request
+
             request_incomming = Request(environ)
             new_log.method_access = request_incomming.environ["REQUEST_METHOD"]
             keys = request_incomming.environ.keys()
@@ -88,4 +88,6 @@ class Middleware:
 
     def set_response_info(self, new_log, json_data):
         new_log.status_code = json_data["status"]
-        new_log.outcomming_data = str(json_data["data"]) if "data" in json_data.keys() else "{}"
+        new_log.outcomming_data = (
+            str(json_data["data"]) if "data" in json_data.keys() else "{}"
+        )

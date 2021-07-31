@@ -7,7 +7,7 @@ from time import sleep
 class TestServer:
     def __init__(self, time_wake_sec: int):
         self.time_wait = time_wake_sec
-        self.time_close = time_wake_sec*2
+        self.time_close = time_wake_sec * 2
         self.current_path = Path(__file__).absolute().parent.parent.parent
         type_platform = system_platform()
 

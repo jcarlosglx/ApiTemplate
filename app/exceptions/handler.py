@@ -4,7 +4,6 @@ from app.messages.returnMessages import MessageReturn
 
 
 class HandlerError:
-
     @staticmethod
     def handler_middleware_error(error: Exception):
         data = ""

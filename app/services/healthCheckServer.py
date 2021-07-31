@@ -24,7 +24,7 @@ class HealthCheckServer:
             trigger="interval",
             seconds=config.HEALTH_CHEK_SEC,
             args=[self.ip, self.port, self.instance, self.prefix, self.endpoint],
-            id="deamon_server"
+            id="deamon_server",
         )
         self.schedule.start()
         atexit.register(lambda: self.schedule.shutdown(wait=False))

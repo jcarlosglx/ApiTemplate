@@ -27,7 +27,4 @@ class ServerDeployConfig(ServerConfig):
     DEBUG = False
 
 
-config_server = {
-    "DEV": ServerDevConfig,
-    "DEPLOY": ServerDeployConfig
-}
+config_server = {"DEV": ServerDevConfig, "DEPLOY": ServerDeployConfig}
