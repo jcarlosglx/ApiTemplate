@@ -7,7 +7,7 @@ base_db = join(base_dir, "base.db")
 
 
 @dataclass
-class BaseConfig(object):
+class AppConfig(object):
     DEBUG = True
     TESTING = True
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + base_db
@@ -16,7 +16,7 @@ class BaseConfig(object):
 
 
 @dataclass
-class DevConfig(BaseConfig):
+class DevConfig(AppConfig):
     DEBUG = False
     TESTING = False
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + base_db
@@ -25,7 +25,7 @@ class DevConfig(BaseConfig):
 
 
 @dataclass
-class DeployConfig(BaseConfig):
+class DeployConfig(AppConfig):
     DEBUG = False
     TESTING = False
     if environ.get("PATH_DB"):
