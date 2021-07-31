@@ -1,10 +1,10 @@
 from flask import Blueprint
 from app.controllers.childrenController import ChildrenController
-from app.config.configEndpoint import ConfigurationEndpoint
+from app.config.configEndpoint import EndpointConfig
 
 
 children_blueprint = Blueprint("children", __name__)
-endpoint = ConfigurationEndpoint.endpoint_children
+endpoint = EndpointConfig.endpoint_children
 
 
 @children_blueprint.route(f"{endpoint}", methods=["POST"])
