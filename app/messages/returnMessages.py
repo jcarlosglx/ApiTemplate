@@ -1,14 +1,15 @@
 from flask import jsonify
 from flask import Response
-from app.messages.errorMessages import ERROR_MSG_500
-from app.messages.statusMessages import STATUS_200, STATUS_500
-from app.messages.successMessages import SUCCESS_MSG_200
+from app.messages.errorMessages import ERROR_MSG_ID_NOT_FOUND
+from app.messages.statusMessages import STATUS_200, STATUS_500, STATUS_201
+from app.messages.successMessages import SUCCESS_MSG_200, SUCCESS_MSG_GET
+from app.messages.successMessages import SUCCESS_MSG_DELETE, SUCCESS_MSG_PATCH, SUCCESS_MSG_POST
 
 
 class MessageReturn:
-    message = None
-    status = None
-    data = None
+    message = SUCCESS_MSG_200
+    status = STATUS_200
+    data = ""
 
     def return_message(self) -> Response:
         response = jsonify(data=self.data, status=self.status, message=self.message)
@@ -24,29 +25,29 @@ class MessageReturn:
     def error_id_not_found(self) -> Response:
         self.status = STATUS_500
         self.data = ""
-        self.message = ERROR_MSG_500
+        self.message = ERROR_MSG_ID_NOT_FOUND
         return self.return_message()
 
     def update_record_message(self, data) -> Response:
         self.status = STATUS_200
         self.data = data
-        self.message = SUCCESS_MSG_200
+        self.message = SUCCESS_MSG_PATCH
         return self.return_message()
 
     def create_record_message(self, data) -> Response:
-        self.status = STATUS_200
+        self.status = STATUS_201
         self.data = data
-        self.message = SUCCESS_MSG_200
+        self.message = SUCCESS_MSG_POST
         return self.return_message()
 
     def delete_record_message(self) -> Response:
-        self.status = STATUS_200
+        self.status = STATUS_201
         self.data = ""
-        self.message = SUCCESS_MSG_200
+        self.message = SUCCESS_MSG_DELETE
         return self.return_message()
 
     def access_record_message(self, data) -> Response:
         self.status = STATUS_200
         self.data = data
-        self.message = SUCCESS_MSG_200
+        self.message = SUCCESS_MSG_GET
         return self.return_message()
