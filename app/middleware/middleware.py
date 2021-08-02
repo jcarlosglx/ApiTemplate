@@ -3,7 +3,7 @@ from io import BytesIO
 from json import load
 from app.models import db
 from app.exceptions.handler import HandlerError
-from typing import Optional, Dict, NoReturn
+from typing import Optional, Dict, NoReturn, Iterable
 
 
 class Middleware:
@@ -12,7 +12,7 @@ class Middleware:
         self.app = app
         self.redirect_msg = "You should be redirected automatically to target URL"
 
-    def __call__(self, environ, start_response):
+    def __call__(self, environ, start_response) -> Iterable:
         try:
             with self.app.test_request_context():
                 is_trackable = environ["REQUEST_METHOD"] != "GET"
@@ -38,7 +38,7 @@ class Middleware:
                     self.commit()
                 else:
                     response = HandlerError.handler_middleware_error(error)
-                return response(environ)
+                return response(environ, start_response)
 
     def commit(self) -> NoReturn:
         with self.app.test_request_context():
