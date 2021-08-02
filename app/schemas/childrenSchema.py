@@ -1,7 +1,13 @@
-from marshmallow import Schema, fields
+from dataclasses import dataclass
+from marshmallow_dataclass import class_schema
 
 
-class ChildrenSchema(Schema):
-    name = fields.String()
-    age = fields.Integer()
-    parent_id = fields.Integer()
+@dataclass
+class ChildrenDataClass:
+    identifier: int
+    name: str
+    age: int
+    father_id: int
+
+
+ChildrenSchema = class_schema(ChildrenDataClass)
