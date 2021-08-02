@@ -1,7 +1,7 @@
 from app.models.logModel import LogModel
 from io import BytesIO
 from json import load
-from app.models import db
+from app.models.entryORM import db
 from app.exceptions.handler import HandlerError
 from typing import Optional, Dict, NoReturn, Iterable
 

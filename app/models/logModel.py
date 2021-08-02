@@ -1,4 +1,4 @@
-from app.models import db
+from app.models.entryORM import db
 
 
 class LogModel(db.Model):

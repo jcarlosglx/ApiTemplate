@@ -5,9 +5,9 @@ from flask import Flask
 from apscheduler.schedulers.background import BackgroundScheduler
 from app.messages.statusMessages import STATUS_200
 from app.models.logModel import LogModel
-from app import get_config_server
+from app.entryApp import get_config_server
 from app.config.configEndpoint import EndpointConfig
-from app.models import db
+from app.models.entryORM import db
 
 
 class HealthCheckServer:

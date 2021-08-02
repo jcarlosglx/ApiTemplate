@@ -1,5 +1,5 @@
 from flask import request, Response
-from app.models import db
+from app.models.entryORM import db
 from app.exceptions.handler import HandlerError
 from app.messages.returnMessages import MessageReturn
 from sqlalchemy.exc import SQLAlchemyError

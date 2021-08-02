@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlalchemy import DateTime, Integer, Float, String, Boolean
-from app.models import db
+from app.models.entryORM import db
 
 
 def get_dummy_record(n: int, class_model: db.Model) -> db.Model:

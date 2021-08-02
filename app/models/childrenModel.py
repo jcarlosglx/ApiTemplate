@@ -1,5 +1,5 @@
 from sqlalchemy_serializer import SerializerMixin
-from app.models import db
+from app.models.entryORM import db
 
 
 class ChildrenModel(db.Model, SerializerMixin):
