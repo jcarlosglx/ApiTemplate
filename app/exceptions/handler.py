@@ -1,23 +1,25 @@
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import MethodNotAllowed
 from app.messages.returnMessages import MessageReturn
+from app.messages.errorMessages import ERROR_MSG_DB_INTEGRITY, ERROR_MSG_METHOD_NOT_ALLOW, ERROR_MSG_500
+from app.messages.statusMessages import STATUS_500, STATUS_405, STATUS_410
+from flask import Response
 
 
 class HandlerError:
     @staticmethod
-    def handler_middleware_error(error: Exception):
-        data = ""
-        message = "Error Server"
-        status = 500
+    def handler_middleware_error(error: Exception) -> Response:
+        message = ERROR_MSG_500
+        status = STATUS_500
+        data = str(error.__class__)
 
         if isinstance(error, IntegrityError):
-            data = str(error.__class__)
-            message = "Error: Data not acceptable"
-            status = 500
+            message = ERROR_MSG_DB_INTEGRITY
+            status = STATUS_410
+
         elif isinstance(error, MethodNotAllowed):
-            data = str(error.__class__)
-            message = "Error: Not able to access"
-            status = 500
+            message = ERROR_MSG_METHOD_NOT_ALLOW
+            status = STATUS_405
 
         response = MessageReturn().custom_return_message(data, message, status)
         response._status = status

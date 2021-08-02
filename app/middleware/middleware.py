@@ -3,6 +3,7 @@ from io import BytesIO
 from json import load
 from app.models import db
 from app.exceptions.handler import HandlerError
+from typing import Optional, Dict, NoReturn
 
 
 class Middleware:
@@ -39,7 +40,7 @@ class Middleware:
                     response = HandlerError.handler_middleware_error(error)
                 return response(environ)
 
-    def commit(self):
+    def commit(self) -> NoReturn:
         with self.app.test_request_context():
             try:
                 db.session.commit()
@@ -47,7 +48,7 @@ class Middleware:
                 db.session.rollback()
                 print("Enable to save log")
 
-    def get_commited_log(self):
+    def get_commited_log(self) -> Optional[LogModel]:
         with self.app.test_request_context():
             log = None
             try:
@@ -58,14 +59,14 @@ class Middleware:
                 print(f"Error: {error}")
             return log
 
-    def get_json_response(self, pay_load):
+    def get_json_response(self, pay_load) -> Dict:
         if self.redirect_msg not in pay_load:
             json_data = load(pay_load)
         else:
             json_data = {"data": pay_load}
         return json_data
 
-    def set_request_info(self, new_log, environ):
+    def set_request_info(self, new_log, environ) -> NoReturn:
         with self.app.test_request_context():
             from werkzeug.wrappers import Request
 
@@ -86,7 +87,7 @@ class Middleware:
             new_log.ip_request = request_incomming.environ["REMOTE_ADDR"]
             new_log.port = request_incomming.environ["REMOTE_PORT"]
 
-    def set_response_info(self, new_log, json_data):
+    def set_response_info(self, new_log, json_data) -> NoReturn:
         new_log.status_code = json_data["status"]
         new_log.outcomming_data = (
             str(json_data["data"]) if "data" in json_data.keys() else "{}"

@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, Response
 from app.controllers.healthCheckServerController import HealthCheckServerController
 from app.config.configEndpoint import EndpointConfig
 
@@ -8,5 +8,5 @@ endpoint = EndpointConfig.endpoint_health_check_server
 
 
 @health_check_server_blueprint.route(f"{endpoint}", methods=["GET"])
-def get_all_children():
+def get_all_children() -> Response:
     return HealthCheckServerController().check_server()

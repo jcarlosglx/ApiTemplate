@@ -1,5 +1,6 @@
 import requests
 import atexit
+from typing import NoReturn
 from flask import Flask
 from apscheduler.schedulers.background import BackgroundScheduler
 from app.messages.statusMessages import STATUS_200
@@ -30,7 +31,7 @@ class HealthCheckServer:
         atexit.register(lambda: self.schedule.shutdown(wait=False))
 
     @staticmethod
-    def create_log(ip: str, port: str, app: Flask, error: str):
+    def create_log(ip: str, port: str, app: Flask, error: str) -> NoReturn:
         try:
             with app.test_request_context():
                 new_log = LogModel()
@@ -51,7 +52,7 @@ class HealthCheckServer:
             print(f"Error: {error}")
 
     @staticmethod
-    def health_check_server(ip: str, port: str, app: Flask, prefix: str, endpoint: str):
+    def health_check_server(ip: str, port: str, app: Flask, prefix: str, endpoint: str) -> NoReturn:
         try:
             with app.test_request_context():
                 url_server = f"http://{ip}:{port}{prefix}{endpoint}"

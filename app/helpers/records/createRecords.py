@@ -2,10 +2,11 @@ from app.models.logModel import LogModel
 from app.models.fatherModel import FatherModel
 from app.models.childrenModel import ChildrenModel
 from app.helpers.records.dummyRecords import get_dummy_record
+from typing import NoReturn
 from app.models import db
 
 
-def create_records(size: int):
+def create_records(size: int) -> NoReturn:
     for n in range(1, size + 1):
         new_log = get_dummy_record(n, LogModel)
         db.session.add(new_log)

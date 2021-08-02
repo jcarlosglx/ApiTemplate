@@ -8,30 +8,30 @@ base_db = join(base_dir, "base.db")
 
 @dataclass
 class AppConfig(object):
-    DEBUG = True
-    TESTING = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + base_db
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    APPLICATION_ROOT = "/api"
+    DEBUG: bool = True
+    TESTING: bool = True
+    SQLALCHEMY_DATABASE_URI: str = "sqlite:///" + base_db
+    SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
+    APPLICATION_ROOT: str = "/api"
 
 
 @dataclass
 class DevConfig(AppConfig):
-    DEBUG = False
-    TESTING = False
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + base_db
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    APPLICATION_ROOT = "/api"
+    DEBUG: bool = False
+    TESTING: bool = False
+    SQLALCHEMY_DATABASE_URI: str = "sqlite:///" + base_db
+    SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
+    APPLICATION_ROOT: str = "/api"
 
 
 @dataclass
 class DeployConfig(AppConfig):
-    DEBUG = False
-    TESTING = False
+    DEBUG: bool = False
+    TESTING: bool = False
     if environ.get("PATH_DB"):
-        SQLALCHEMY_DATABASE_URI = environ.get("PATH_DB")
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    APPLICATION_ROOT = "/api"
+        SQLALCHEMY_DATABASE_URI: str = environ.get("PATH_DB")
+    SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
+    APPLICATION_ROOT: str = "/api"
 
 
-config_app = {"DEV": DevConfig, "DEPLOY": DeployConfig}
+config_app: dict = {"DEV": DevConfig, "DEPLOY": DeployConfig}

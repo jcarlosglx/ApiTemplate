@@ -21,31 +21,31 @@ class MessageReturn:
         self.message = message
         return self.return_message()
 
-    def error_id_not_found(self):
+    def error_id_not_found(self) -> Response:
         self.status = STATUS_500
         self.data = ""
         self.message = ERROR_MSG_500
         return self.return_message()
 
-    def update_record_message(self, data):
+    def update_record_message(self, data) -> Response:
         self.status = STATUS_200
         self.data = data
         self.message = SUCCESS_MSG_200
         return self.return_message()
 
-    def create_record_message(self, data):
+    def create_record_message(self, data) -> Response:
         self.status = STATUS_200
         self.data = data
         self.message = SUCCESS_MSG_200
         return self.return_message()
 
-    def delete_record_message(self):
+    def delete_record_message(self) -> Response:
         self.status = STATUS_200
         self.data = ""
         self.message = SUCCESS_MSG_200
         return self.return_message()
 
-    def access_record_message(self, data):
+    def access_record_message(self, data) -> Response:
         self.status = STATUS_200
         self.data = data
         self.message = SUCCESS_MSG_200

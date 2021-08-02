@@ -1,11 +1,12 @@
 from datetime import datetime
 from sqlalchemy import DateTime, Integer, Float, String, Boolean
+from app.models import db
 
 
-def get_dummy_record(n: int, some_class):
-    new_record = some_class()
-    for key in some_class.__table__.columns.keys():
-        type_column = some_class.__table__.columns[key].type
+def get_dummy_record(n: int, class_model: db.Model) -> db.Model:
+    new_record = class_model()
+    for key in class_model.__table__.columns.keys():
+        type_column = class_model.__table__.columns[key].type
         if isinstance(type_column, Integer) and key != "id":
             setattr(new_record, key, n)
         elif isinstance(type_column, Float):
