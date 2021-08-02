@@ -1,6 +1,11 @@
 from app.models.entryORM import db
 from app.helpers.records.createRecords import create_records
-from app.entryApp import create_app, get_config_app, get_config_server, check_connection_db
+from app.entryApp import (
+    create_app,
+    get_config_app,
+    get_config_server,
+    check_connection_db,
+)
 from flask_script import Manager
 from app.routes.blueprints import load_blueprints
 from app.models.entryORM import load_models

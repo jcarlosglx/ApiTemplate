@@ -1,7 +1,11 @@
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import MethodNotAllowed
 from app.messages.returnMessages import MessageReturn
-from app.messages.errorMessages import ERROR_MSG_DB_INTEGRITY, ERROR_MSG_METHOD_NOT_ALLOW, ERROR_MSG_500
+from app.messages.errorMessages import (
+    ERROR_MSG_DB_INTEGRITY,
+    ERROR_MSG_METHOD_NOT_ALLOW,
+    ERROR_MSG_500,
+)
 from app.messages.statusMessages import STATUS_500, STATUS_405, STATUS_410
 from flask import Response
 

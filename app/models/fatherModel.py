@@ -5,7 +5,7 @@ from app.models.entryORM import db
 class FatherModel(db.Model, SerializerMixin):
     __tablename__ = "father_model"
     __table_args__ = {"extend_existing": True}
-    serialize_rules = ("-children.father", )
+    serialize_rules = ("-children.father",)
 
     id: int = db.Column(db.Integer, primary_key=True)
     name: str = db.Column(db.String(50), unique=True, nullable=False)

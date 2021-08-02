@@ -3,7 +3,11 @@ from flask import Response
 from app.messages.errorMessages import ERROR_MSG_ID_NOT_FOUND
 from app.messages.statusMessages import STATUS_200, STATUS_500, STATUS_201
 from app.messages.successMessages import SUCCESS_MSG_200, SUCCESS_MSG_GET
-from app.messages.successMessages import SUCCESS_MSG_DELETE, SUCCESS_MSG_PATCH, SUCCESS_MSG_POST
+from app.messages.successMessages import (
+    SUCCESS_MSG_DELETE,
+    SUCCESS_MSG_PATCH,
+    SUCCESS_MSG_POST,
+)
 
 
 class MessageReturn:

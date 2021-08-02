@@ -52,7 +52,9 @@ class HealthCheckServer:
             print(f"Error: {error}")
 
     @staticmethod
-    def health_check_server(ip: str, port: str, app: Flask, prefix: str, endpoint: str) -> NoReturn:
+    def health_check_server(
+        ip: str, port: str, app: Flask, prefix: str, endpoint: str
+    ) -> NoReturn:
         try:
             with app.test_request_context():
                 url_server = f"http://{ip}:{port}{prefix}{endpoint}"

@@ -9,4 +9,6 @@ class HealthCheckServerController:
         self.data = "HealthCheckController"
 
     def check_server(self) -> Response:
-        return MessageReturn().custom_return_message(self.data, SUCCESS_HEALTH_CHECK_SERVER, STATUS_200)
+        return MessageReturn().custom_return_message(
+            self.data, SUCCESS_HEALTH_CHECK_SERVER, STATUS_200
+        )
