@@ -7,7 +7,7 @@ class ChildrenModel(db.Model, SerializerMixin):
     __table_args__ = {"extend_existing": True}
     serializer_rules = ()
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True, nullable=False)
-    age = db.Column(db.Integer)
-    parent_id = db.Column(db.Integer, db.ForeignKey("father_model.id"))
+    id: int = db.Column(db.Integer, primary_key=True)
+    name: str = db.Column(db.String(50), unique=True, nullable=False)
+    age: int = db.Column(db.Integer)
+    parent_id: int = db.Column(db.Integer, db.ForeignKey("father_model.id"))
