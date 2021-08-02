@@ -12,6 +12,14 @@ class BaseController:
     schema = None
     rules = None
 
+    def commit_change(self) -> bool:
+        try:
+            db.session.commit()
+            return True
+        except SQLAlchemyError as error:
+            db.session.rollback()
+            return False
+
     def get_flat_data(self, results) -> List[Dict]:
         if self.rules:
             data = [result.to_dict(rules=self.rules) for result in results]
@@ -27,11 +35,8 @@ class BaseController:
         schema = self.schema()
         schema.load(self.data_json, partial=True)
         result.update(self.data_json)
-        try:
-            db.session.commit()
-        except SQLAlchemyError as error:
-            db.session.rollback()
-            return HandlerError.handler_middleware_error(error)
+        if self.commit_change():
+            return HandlerError.handler_middleware_error(SQLAlchemyError())
         data = self.get_flat_data(result)
         return MessageReturn().update_record_message(data)
 
@@ -56,13 +61,9 @@ class BaseController:
         schema = self.schema()
         valid_data = schema.load(self.data_json)
         new_record = self.model(**valid_data)
-
-        try:
-            db.session.add(new_record)
-            db.session.commit()
-        except SQLAlchemyError as error:
-            db.session.rollback()
-            return HandlerError.handler_middleware_error(error)
+        db.session.add(new_record)
+        if self.commit_change():
+            return HandlerError.handler_middleware_error(SQLAlchemyError())
 
         data = self.get_flat_data(new_record)
         return MessageReturn().create_record_message(data)
@@ -72,11 +73,7 @@ class BaseController:
         result = self.model.query.filter_by(id=id_record).first()
         if not result:
             return MessageReturn().error_id_not_found()
-        try:
-            db.session.delete(result)
-            db.session.commit()
-        except SQLAlchemyError as error:
-            db.session.rollback()
-            return HandlerError.handler_middleware_error(error)
-
+        db.session.delete(result)
+        if self.commit_change():
+            return HandlerError.handler_middleware_error(SQLAlchemyError())
         return MessageReturn().delete_record_message()
