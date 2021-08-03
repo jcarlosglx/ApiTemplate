@@ -1,4 +1,9 @@
-from test.base_test.baseTest import BasePatchTest, BaseDeleteTest, BaseGetTest, BasePostTest
+from test.base_test.baseTest import (
+    BasePatchTest,
+    BaseDeleteTest,
+    BaseGetTest,
+    BasePostTest,
+)
 from test.config.configTest import ConfigTest
 from app.schemas.fatherSchema import FatherSchema
 

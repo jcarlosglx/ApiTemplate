@@ -10,4 +10,6 @@ class FatherModel(db.Model, SerializerMixin):
     id: int = db.Column(db.Integer, primary_key=True)
     name: str = db.Column(db.String(50), unique=True, nullable=False)
     age: int = db.Column(db.Integer)
-    children = db.relationship("ChildrenModel", back_populates="father", cascade="all, delete-orphan")
+    children = db.relationship(
+        "ChildrenModel", back_populates="father", cascade="all, delete-orphan"
+    )

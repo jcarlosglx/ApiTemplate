@@ -21,6 +21,7 @@ def update_father(id_record) -> Response:
 def delete_father(id_record) -> Response:
     return FatherController().delete_record(id_record)
 
+
 @father_blueprint.route(f"{endpoint}", methods=["GET"])
 def get_fathers() -> Response:
     return FatherController().get_all_records()
