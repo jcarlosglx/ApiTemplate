@@ -1,9 +1,10 @@
 from datetime import datetime
 from sqlalchemy import DateTime, Integer, Float, String, Boolean
+from typing import Type
 from app.models.entryORM import db
 
 
-def get_dummy_record(n: int, class_model: db.Model) -> db.Model:
+def get_dummy_record(n: int, class_model: Type[db.Model]) -> Type[db.Model]:
     new_record = class_model()
     for key in class_model.__table__.columns.keys():
         type_column = class_model.__table__.columns[key].type
