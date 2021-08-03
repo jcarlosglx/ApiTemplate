@@ -1,7 +1,7 @@
 from flask import jsonify
 from flask import Response
 from app.messages.errorMessages import ERROR_MSG_ID_NOT_FOUND
-from app.messages.statusMessages import STATUS_200, STATUS_500, STATUS_201
+from app.messages.statusMessages import STATUS_200, STATUS_500
 from app.messages.successMessages import SUCCESS_MSG_200, SUCCESS_MSG_GET
 from app.messages.successMessages import (
     SUCCESS_MSG_DELETE,
@@ -39,13 +39,13 @@ class MessageReturn:
         return self.return_message()
 
     def create_record_message(self, data) -> Response:
-        self.status = STATUS_201
+        self.status = STATUS_200
         self.data = data
         self.message = SUCCESS_MSG_POST
         return self.return_message()
 
     def delete_record_message(self) -> Response:
-        self.status = STATUS_201
+        self.status = STATUS_200
         self.data = ""
         self.message = SUCCESS_MSG_DELETE
         return self.return_message()
