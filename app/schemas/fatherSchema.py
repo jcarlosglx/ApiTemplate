@@ -1,12 +1,6 @@
-from dataclasses import dataclass
-from marshmallow_dataclass import class_schema
+from marshmallow import Schema
 
 
-@dataclass
-class FatherDataClass:
+class FatherSchema(Schema):
     age: int
-    identifier: int
     name: str
-
-
-FatherSchema = class_schema(FatherDataClass)
