@@ -16,7 +16,7 @@ class AppConfig(object):
 
 
 @dataclass
-class DevConfig(AppConfig):
+class AppDevConfig(AppConfig):
     DEBUG: bool = False
     TESTING: bool = False
     SQLALCHEMY_DATABASE_URI: str = "sqlite:///" + base_db
@@ -25,7 +25,7 @@ class DevConfig(AppConfig):
 
 
 @dataclass
-class DeployConfig(AppConfig):
+class AppDeployConfig(AppConfig):
     DEBUG: bool = False
     TESTING: bool = False
     if environ.get("PATH_DB"):
@@ -34,4 +34,4 @@ class DeployConfig(AppConfig):
     APPLICATION_ROOT: str = "/api"
 
 
-config_app: dict = {"DEV": DevConfig, "DEPLOY": DeployConfig}
+config_app: dict = {"DEV": AppDevConfig, "DEPLOY": AppDeployConfig}
