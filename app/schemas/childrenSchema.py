@@ -1,7 +1,7 @@
-from marshmallow import Schema
+from marshmallow import Schema, fields
 
 
 class ChildrenSchema(Schema):
-    name: str
-    age: int
-    father_id: int
+    name: str = fields.String()
+    age: int = fields.Integer()
+    father_id: int = fields.Integer()

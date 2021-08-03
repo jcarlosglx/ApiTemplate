@@ -7,12 +7,12 @@ class ChildrenModel(db.Model, SerializerMixin):
     __table_args__ = {"extend_existing": True}
     serialize_rules = ("-father.children",)
 
-    identifier: int = db.Column(db.Integer, primary_key=True)
+    id: int = db.Column(db.Integer, primary_key=True)
     name: str = db.Column(db.String(50), unique=True, nullable=False)
     age: int = db.Column(db.Integer)
     father_id: int = db.Column(
         db.Integer,
-        db.ForeignKey("father_model.identifier", ondelete="CASCADE"),
+        db.ForeignKey("father_model.id", ondelete="CASCADE"),
         nullable=False,
     )
     father = db.relationship("FatherModel", back_populates="children")

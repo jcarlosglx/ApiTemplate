@@ -13,9 +13,9 @@ def create_app() -> Flask:
     config = get_config_app()
     app.config.from_object(config)
     db.init_app(app)
-    app.wsgi_app = Middleware(app)
-    for exception in default_exceptions:
-        app.register_error_handler(exception, HandlerError.handler_middleware_error)
+    # app.wsgi_app = Middleware(app)
+    # for exception in default_exceptions:
+    #     app.register_error_handler(exception, HandlerError.handler_middleware_error)
     return app
 
 

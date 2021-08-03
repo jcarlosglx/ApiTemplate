@@ -92,3 +92,5 @@ class Middleware:
         new_log.outcomming_data = (
             str(json_data["data"]) if "data" in json_data.keys() else "{}"
         )
+
+

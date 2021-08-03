@@ -7,15 +7,14 @@ from test.config.configTest import ConfigTest
 
 
 class BaseGetTest:
-    id_get: int = 1
     expect_status_get: str = STATUS_200
     url_get: str = ConfigTest.URL
     endpoint_get: str
     response_key: str = ConfigTest.response_key
 
     def test_get(self):
-        response = get(f"{self.url_get}{self.endpoint_get}{self.id_get}")
-        assert response.json()[f"{self.response_key}"] != self.expect_status_get
+        response = get(f"{self.url_get}{self.endpoint_get}")
+        assert response.json()[self.response_key] == self.expect_status_get
 
 
 class BaseDeleteTest:
@@ -26,8 +25,8 @@ class BaseDeleteTest:
     response_key: str = ConfigTest.response_key
 
     def test_delete(self):
-        response = delete(f"{self.url_delete}{self.endpoint_delete}{self.id_delete}")
-        assert response.json()[f"{self.response_key}"] != self.expect_status_delete
+        response = delete(f"{self.url_delete}{self.endpoint_delete}/{self.id_delete}")
+        assert response.json()[self.response_key] == self.expect_status_delete
 
 
 class BasePostTest:
@@ -40,7 +39,7 @@ class BasePostTest:
     def test_post(self):
         json_data = get_dummy_json_test(self.schema_post)
         response = post(f"{self.url_post}{self.endpoint_post}", json=json_data)
-        assert response.json()[f"{self.response_key}"] != self.expect_status_post
+        assert response.json()[self.response_key] == self.expect_status_post
 
 
 class BasePatchTest:
@@ -54,7 +53,6 @@ class BasePatchTest:
     def test_patch(self):
         json_data = get_dummy_json_test(self.schema_patch)
         response = patch(
-            f"{self.url_patch}{self.endpoint_patch}/{self.id_patch}", data=json_data
+            f"{self.url_patch}{self.endpoint_patch}/{self.id_patch}", json=json_data
         )
-        print(f"{self.url_patch}{self.endpoint_patch}{self.id_patch}")
-        assert response.json()[f"{self.response_key}"] != self.expect_status_patch
+        assert response.json()[self.response_key] == self.expect_status_patch

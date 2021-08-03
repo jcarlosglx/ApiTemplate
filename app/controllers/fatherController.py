@@ -6,3 +6,4 @@ from app.schemas.fatherSchema import FatherSchema
 class FatherController(BaseController):
     model = FatherModel
     schema = FatherSchema
+    rules = FatherModel.serialize_rules

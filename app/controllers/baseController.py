@@ -21,11 +21,7 @@ class BaseController:
             return False
 
     def get_flat_data(self, results) -> List[Dict]:
-        if self.rules:
-            data = [result.to_dict(rules=self.rules) for result in results]
-        else:
-            data = [result.to_dict() for result in results]
-        return data
+        return [result.to_dict(rules=self.rules) for result in results]
 
     def update_record(self, id_record) -> Response:
         self.data_json = request.get_json()
@@ -35,9 +31,9 @@ class BaseController:
         schema = self.schema()
         schema.load(self.data_json, partial=True)
         result.update(self.data_json)
-        if self.commit_change():
+        if not self.commit_change():
             return HandlerError.handler_middleware_error(SQLAlchemyError())
-        data = self.get_flat_data(result)
+        data = result.first().to_dict(rules=self.rules)
         return MessageReturn().update_record_message(data)
 
     def get_individual_record(self, id_record) -> Response:
@@ -45,7 +41,7 @@ class BaseController:
         result = self.model.query.filter_by(id=id_record).first()
         if not result:
             return MessageReturn().error_id_not_found()
-        data = self.get_flat_data(result)
+        data = result.to_dict(rules=self.rules)
         return MessageReturn().access_record_message(data)
 
     def get_all_records(self) -> Response:
@@ -62,10 +58,10 @@ class BaseController:
         valid_data = schema.load(self.data_json)
         new_record = self.model(**valid_data)
         db.session.add(new_record)
-        if self.commit_change():
+        if not self.commit_change():
             return HandlerError.handler_middleware_error(SQLAlchemyError())
 
-        data = self.get_flat_data(new_record)
+        data = new_record.to_dict(rules=self.rules)
         return MessageReturn().create_record_message(data)
 
     def delete_record(self, id_record) -> Response:
@@ -74,6 +70,6 @@ class BaseController:
         if not result:
             return MessageReturn().error_id_not_found()
         db.session.delete(result)
-        if self.commit_change():
+        if not self.commit_change():
             return HandlerError.handler_middleware_error(SQLAlchemyError())
         return MessageReturn().delete_record_message()

@@ -17,6 +17,10 @@ def update_children(id_record) -> Response:
     return ChildrenController().update_record(id_record)
 
 
+@children_blueprint.route(f"{endpoint}/<id_record>", methods=["DELETE"])
+def delete_children(id_record) -> Response:
+    return ChildrenController().delete_record(id_record)
+
 @children_blueprint.route(f"{endpoint}", methods=["GET"])
 def get_all_children() -> Response:
     return ChildrenController().get_all_records()

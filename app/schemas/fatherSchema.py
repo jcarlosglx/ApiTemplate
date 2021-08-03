@@ -1,6 +1,6 @@
-from marshmallow import Schema
+from marshmallow import Schema, fields
 
 
 class FatherSchema(Schema):
-    age: int
-    name: str
+    age: int = fields.Integer()
+    name: str = fields.String()

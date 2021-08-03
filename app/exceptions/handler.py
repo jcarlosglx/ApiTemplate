@@ -28,3 +28,21 @@ class HandlerError:
         response = MessageReturn().custom_return_message(data, message, status)
         response._status = status
         return response
+
+    @staticmethod
+    def handler_http_error(error: Exception) -> Response:
+        message = ERROR_MSG_500
+        status = STATUS_500
+        data = str(error.__class__)
+
+        if isinstance(error, IntegrityError):
+            message = ERROR_MSG_DB_INTEGRITY
+            status = STATUS_410
+
+        elif isinstance(error, MethodNotAllowed):
+            message = ERROR_MSG_METHOD_NOT_ALLOW
+            status = STATUS_405
+
+        response = MessageReturn().custom_return_message(data, message, status)
+        response._status = status
+        return response
