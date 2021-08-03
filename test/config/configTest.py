@@ -6,4 +6,8 @@ from app.config.configApp import AppDevConfig
 
 @dataclass
 class ConfigTest(EndpointConfig, ServerDevConfig, AppDevConfig):
-    URL: str = f"{ServerDevConfig.HOST}:{ServerDevConfig.PORT}{AppDevConfig.SQLALCHEMY_DATABASE_URI}"
+    HOST: str = ServerDevConfig.HOST
+    PORT: int = ServerDevConfig.PORT
+    PREFIX: str = AppDevConfig.APPLICATION_ROOT
+    URL: str = f"http://{HOST}:{PORT}{PREFIX}"
+    response_key: str = "status"

@@ -1,26 +1,26 @@
-from typing import Dict
+from typing import Dict, Type
 from string import ascii_uppercase, digits
-from dataclasses import dataclass
 from datetime import datetime
 from random import randint, random, choices
+from marshmallow import Schema
 
 
-def get_dummy_json_test(data_class: dataclass) -> Dict:
+def get_dummy_json_test(schema: Type[Schema]) -> Dict:
     data_json = {}
-    dict_variables: Dict = data_class.__annotations__
+    dict_variables: Dict = schema.__annotations__
     for key in dict_variables.keys():
         type_field = str(dict_variables[key])
         name_field = str(key)
         if type_field == "<class 'int'>":
             data_json[name_field] = randint(1, 10)
-        if type_field == "<class 'float'>":
+        elif type_field == "<class 'float'>":
             data_json[name_field] = random()
-        if type_field == "<class 'bool'>":
+        elif type_field == "<class 'bool'>":
             data_json[name_field] = random() >= 0.5
-        if type_field == "<class 'str'>":
+        elif type_field == "<class 'str'>":
             data_json[name_field] = "".join(choices(ascii_uppercase + digits, k=10))
-        if type_field == "<class 'datetime'>":
+        elif type_field == "<class 'datetime'>":
             data_json[name_field] = datetime.now()
         else:
-            print(f"Not define values for {name_field} type {type_field}")
+            print(isinstance(type_field, int))
     return data_json
