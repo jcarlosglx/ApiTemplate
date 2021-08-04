@@ -27,14 +27,18 @@ def check_connection_db() -> bool:
         return False
 
 
-def get_config_app() -> AppConfig:
+def get_config_app(type_config: str = "") -> AppConfig:
+    if type_config != "":
+        return config_app[type_config]
     type_configuration = "DEV"
     if environ.get("PATH_DB"):
         type_configuration = "DEPLOY"
     return config_app[type_configuration]
 
 
-def get_config_server() -> ServerConfig:
+def get_config_server(type_config: str = "") -> ServerConfig:
+    if type_config != "":
+        return config_server[type_config]
     type_configuration = "DEV"
     if environ.get("NAME_SERVER_API") and environ.get("PORT_SERVER_API"):
         type_configuration = "DEPLOY"
