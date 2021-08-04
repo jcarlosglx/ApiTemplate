@@ -8,4 +8,3 @@ class TestDeleteDB(BaseGetTest):
 
 class TestCreateDB(BaseGetTest):
     endpoint_get = ConfigTest.endpoint_database_create
-
