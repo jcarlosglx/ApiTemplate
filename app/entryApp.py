@@ -5,6 +5,7 @@ from app.exceptions.handler import HandlerError
 from app.middleware.middleware import Middleware
 from app.models.entryORM import db
 from app.config.configApp import config_app, AppConfig
+from app.config.configDB import config_db, DBConfig
 from app.config.configServer import config_server, ServerConfig
 
 
@@ -34,6 +35,15 @@ def get_config_app(type_config: str = "") -> AppConfig:
     if environ.get("PATH_DB"):
         type_configuration = "DEPLOY"
     return config_app[type_configuration]
+
+
+def get_config_db(type_config: str = "") -> DBConfig:
+    if type_config != "":
+        return config_db[type_config]
+    type_configuration = "DEV"
+    if environ.get("PATH_DB"):
+        type_configuration = "DEPLOY"
+    return config_db[type_configuration]
 
 
 def get_config_server(type_config: str = "") -> ServerConfig:

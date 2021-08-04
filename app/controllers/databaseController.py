@@ -4,6 +4,8 @@ from app.messages.returnMessages import MessageReturn
 from app.messages.statusMessages import STATUS_200, STATUS_500
 from app.messages.errorMessages import ERROR_MSG_DB_CREATED, ERROR_MSG_DB_DELETED
 from app.messages.successMessages import SUCCESS_MSG_DB_CREATED, SUCCESS_MSG_DB_DELETED
+from app.config.configDB import DBConfig
+from app.helpers.records.deleteRecords import delete_records
 from flask import Response
 
 
@@ -15,7 +17,7 @@ class DatabaseController:
         try:
             load_models()
             db.create_all()
-            create_records(10)
+            create_records(DBConfig.N_DUMMY_RECORDS)
             return MessageReturn().custom_return_message(
                 self.data, SUCCESS_MSG_DB_CREATED, STATUS_200
             )
@@ -27,10 +29,7 @@ class DatabaseController:
 
     def delete_database(self) -> Response:
         try:
-            for table in db.metadata.tables.keys():
-                db.session.execute(f"TRUNCATE TABLE {table} CASCADE")
-                db.session.execute(f"ALTER SEQUENCE {table}_id_seq RESTART WITH 1")
-            db.session.commit()
+            delete_records()
             return MessageReturn().custom_return_message(
                 self.data, SUCCESS_MSG_DB_DELETED, STATUS_200
             )
