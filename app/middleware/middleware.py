@@ -1,6 +1,6 @@
 from app.models.logModel import LogModel
 from io import BytesIO
-from json import load
+from json import loads
 from app.models.entryORM import db
 from app.exceptions.handler import HandlerError
 from typing import Optional, Dict, NoReturn, Iterable
@@ -61,7 +61,7 @@ class Middleware:
 
     def get_json_response(self, pay_load) -> Dict:
         if self.redirect_msg not in pay_load:
-            json_data = load(pay_load)
+            json_data = loads(pay_load)
         else:
             json_data = {"data": pay_load}
         return json_data

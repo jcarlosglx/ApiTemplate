@@ -1,4 +1,4 @@
-from requests import get, post, patch, delete
+from requests import get, post, patch, delete, put
 from typing import Type
 from marshmallow import Schema
 from app.messages.statusMessages import STATUS_200
@@ -56,3 +56,19 @@ class BasePatchTest:
             f"{self.url_patch}{self.endpoint_patch}/{self.id_patch}", json=json_data
         )
         assert response.json()[self.response_key] == self.expect_status_patch
+
+
+class BasePutTest:
+    id_put: int = 3
+    expect_status_put: str = STATUS_200
+    url_put: str = ConfigTest.URL
+    endpoint_put: str
+    response_key: str = ConfigTest.response_key
+    schema_put: Type[Schema]
+
+    def test_patch(self):
+        json_data = get_dummy_json_test(self.schema_put)
+        response = put(
+            f"{self.url_put}{self.endpoint_put}/{self.id_put}", json=json_data
+        )
+        assert response.json()[self.response_key] == self.expect_status_put
