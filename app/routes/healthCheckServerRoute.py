@@ -8,5 +8,5 @@ endpoint = EndpointConfig.endpoint_health_check_server
 
 
 @health_check_server_blueprint.route(f"{endpoint}", methods=["GET"])
-def get_all_children() -> Response:
+def check_server() -> Response:
     return HealthCheckServerController().check_server()

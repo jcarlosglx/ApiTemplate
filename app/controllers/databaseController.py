@@ -11,7 +11,7 @@ from flask import Response
 
 class DatabaseController:
     def __init__(self):
-        self.data = str(self.__class__)
+        self.data = ""
 
     def create_database(self) -> Response:
         try:
