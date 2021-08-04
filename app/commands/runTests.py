@@ -9,7 +9,7 @@ from os import system as system_command
 
 class RunTests(BaseCommand):
 
-    NAME: str = "init_db"
+    NAME: str = "run_tests"
 
     def run(self):
         is_alive_db = check_connection_db()

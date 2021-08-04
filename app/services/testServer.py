@@ -12,13 +12,14 @@ class TestServer:
         self.type_platform = system_platform()
 
         if self.type_platform == "Windows":
-            self.test_files_path = f'"{self.current_path}\\__test"'
-            self.main_files_path = f'"{self.current_path}\\main.py"'
+            self.test_files_path = f"{self.current_path}\\test"
+            self.main_files_path = f"{self.current_path}\\main.py"
         else:
-            self.test_files_path = f'"{self.current_path}/__test"'
-            self.main_files_path = f'"{self.current_path}/main.py"'
+            self.test_files_path = f"{self.current_path}/test"
+            self.main_files_path = f"{self.current_path}/main.py"
 
     def __enter__(self):
+        print(self.main_files_path)
         self.server = Popen(["python", f"{self.main_files_path}", "run_server"])
         print(f"Waiting {self.time_wait} for awake server")
         sleep(self.time_wait)
