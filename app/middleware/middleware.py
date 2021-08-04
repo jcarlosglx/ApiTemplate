@@ -89,6 +89,4 @@ class Middleware:
 
     def set_response_info(self, new_log, json_data) -> NoReturn:
         new_log.status_code = json_data["status"]
-        new_log.outcomming_data = (
-            str(json_data["data"]) if "data" in json_data.keys() else "{}"
-        )
+        new_log.outcomming_data = str(json_data["data"])
