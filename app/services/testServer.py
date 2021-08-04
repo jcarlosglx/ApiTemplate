@@ -9,9 +9,9 @@ class TestServer:
         self.time_wait = time_wake_sec
         self.time_close = time_wake_sec * 2
         self.current_path = Path(__file__).absolute().parent.parent.parent
-        type_platform = system_platform()
+        self.type_platform = system_platform()
 
-        if type_platform == "Windows":
+        if self.type_platform == "Windows":
             self.test_files_path = f'"{self.current_path}\\__test"'
             self.main_files_path = f'"{self.current_path}\\main.py"'
         else:
