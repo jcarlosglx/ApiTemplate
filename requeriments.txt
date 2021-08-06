@@ -6,6 +6,7 @@ gunicorn
 isort
 pre-commit
 pytest
+pytest-cov
 
 # Project requirements
 flask==1.1.4

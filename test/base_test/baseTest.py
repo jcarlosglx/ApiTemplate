@@ -4,6 +4,13 @@ from marshmallow import Schema
 from app.messages.statusMessages import STATUS_200
 from test.helpers.dummy_json_test.dummy_json_test import get_dummy_json_test
 from test.config.configTest import ConfigTest
+from app.entryApp import create_app, check_connection_db
+from app.routes.blueprints import load_blueprints
+from app.models.entryORM import load_models, CustomSQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
+from typing import Type
+from flask import Flask
+import pytest
 
 
 class BaseGetTest:
@@ -12,9 +19,27 @@ class BaseGetTest:
     endpoint_get: str
     response_key: str = ConfigTest.response_key
 
-    def test_get(self):
-        response = get(f"{self.url_get}{self.endpoint_get}")
-        assert response.json()[self.response_key] == self.expect_status_get
+    @pytest.fixture
+    def get_app(self) -> Flask:
+        app = create_app()
+        yield app
+
+    @pytest.fixture
+    def get_db(self, get_app: Flask) -> Type[SQLAlchemy]:
+        load_models()
+        with get_app.test_request_context():
+            load_blueprints(get_app)
+            is_alive_db = check_connection_db()
+            if is_alive_db:
+                db = CustomSQLAlchemy
+                yield db
+            else:
+                print("Unable to connect with teh dabase")
+
+    def test_get(self, get_app: Flask, get_db: Type[SQLAlchemy]):
+        response = get_app.test_client().get(f"{self.url_get}{self.endpoint_get}")
+        code_response = response.get_json()[self.response_key]
+        assert code_response == self.expect_status_get, f"Expected {self.expect_status_get} got {code_response}"
 
 
 class BaseDeleteTest:

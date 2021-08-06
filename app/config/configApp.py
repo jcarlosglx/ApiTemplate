@@ -15,7 +15,7 @@ class AppConfig(object):
 @dataclass
 class AppDevConfig(AppConfig):
     DEBUG: bool = False
-    TESTING: bool = False
+    TESTING: bool = True
     SQLALCHEMY_DATABASE_URI: str = DBDevConfig.PATH
 
 
