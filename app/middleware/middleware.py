@@ -85,7 +85,7 @@ class Middleware:
             new_log.incomming_data = data_request.decode("utf-8")
             request_incomming.environ["wsgi.input"] = BytesIO(data_request)
             new_log.ip_request = request_incomming.environ["REMOTE_ADDR"]
-            new_log.port = request_incomming.environ["REMOTE_PORT"]
+            new_log.port = request_incomming.environ.get("REMOTE_PORT")
 
     def set_response_info(self, new_log, json_data) -> NoReturn:
         new_log.status_code = json_data["status"]

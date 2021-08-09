@@ -15,7 +15,7 @@ class HandlerError:
     def handler_middleware_error(error: Exception) -> Response:
         message = ERROR_MSG_500
         status = STATUS_500
-        data = str(error.__class__)
+        data = str(error)
 
         if isinstance(error, IntegrityError):
             message = ERROR_MSG_DB_INTEGRITY
@@ -33,7 +33,7 @@ class HandlerError:
     def handler_http_error(error: Exception) -> Response:
         message = ERROR_MSG_500
         status = STATUS_500
-        data = str(error.__class__)
+        data = str(error)
 
         if isinstance(error, IntegrityError):
             message = ERROR_MSG_DB_INTEGRITY

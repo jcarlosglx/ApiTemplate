@@ -65,7 +65,6 @@ class BaseController:
         return MessageReturn().create_record_message(data)
 
     def delete_record(self, id_record) -> Response:
-        self.data_json = request.get_json()
         result = self.model.query.filter_by(id=id_record).first()
         if not result:
             return MessageReturn().error_id_not_found()
