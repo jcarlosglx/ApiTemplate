@@ -1,7 +1,8 @@
 from test.base_test.baseTest import BasePutTest
 from test.config.configTest import ConfigTest
-from app.schemas.fatherSchema import FatherSchema
+
 from app.messages.statusMessages import STATUS_405
+from app.schemas.fatherSchema import FatherSchema
 
 
 class TestMiddleware(BasePutTest):

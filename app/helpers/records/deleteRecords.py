@@ -1,5 +1,6 @@
-from app.models.entryORM import db
 from typing import NoReturn
+
+from app.models.entryORM import db
 
 
 def delete_records() -> NoReturn:

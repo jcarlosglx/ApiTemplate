@@ -1,9 +1,6 @@
 from app.commands.baseCommand import BaseCommand
+from app.entryApp import check_connection_db, get_config_server
 from app.routes.blueprints import load_blueprints
-from app.entryApp import (
-    get_config_server,
-    check_connection_db,
-)
 
 
 class RunServer(BaseCommand):

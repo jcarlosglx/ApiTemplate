@@ -1,7 +1,7 @@
 from flask import Blueprint, Response
-from app.controllers.childrenController import ChildrenController
-from app.config.configEndpoint import EndpointConfig
 
+from app.config.configEndpoint import EndpointConfig
+from app.controllers.childrenController import ChildrenController
 
 children_blueprint = Blueprint("children", __name__)
 endpoint = EndpointConfig.endpoint_children

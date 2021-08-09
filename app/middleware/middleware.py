@@ -1,9 +1,10 @@
-from app.models.logModel import LogModel
 from io import BytesIO
 from json import loads
-from app.models.entryORM import db
+from typing import Dict, Iterable, NoReturn, Optional
+
 from app.exceptions.handler import HandlerError
-from typing import Optional, Dict, NoReturn, Iterable
+from app.models.entryORM import db
+from app.models.logModel import LogModel
 
 
 class Middleware:

@@ -1,7 +1,8 @@
 from dataclasses import dataclass
+
+from app.config.configApp import AppDevConfig
 from app.config.configEndpoint import EndpointConfig
 from app.config.configServer import ServerDevConfig
-from app.config.configApp import AppDevConfig
 
 
 @dataclass

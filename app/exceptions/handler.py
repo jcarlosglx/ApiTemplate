@@ -1,13 +1,11 @@
+from flask import Response
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import MethodNotAllowed
+
+from app.messages.errorMessages import (ERROR_MSG_500, ERROR_MSG_DB_INTEGRITY,
+                                        ERROR_MSG_METHOD_NOT_ALLOW)
 from app.messages.returnMessages import MessageReturn
-from app.messages.errorMessages import (
-    ERROR_MSG_DB_INTEGRITY,
-    ERROR_MSG_METHOD_NOT_ALLOW,
-    ERROR_MSG_500,
-)
-from app.messages.statusMessages import STATUS_500, STATUS_405, STATUS_410
-from flask import Response
+from app.messages.statusMessages import STATUS_405, STATUS_410, STATUS_500
 
 
 class HandlerError:

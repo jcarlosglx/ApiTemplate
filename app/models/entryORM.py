@@ -9,9 +9,9 @@ class CustomSQLAlchemy(BaseSQLAlchemy):
 
 
 def load_models():
-    from app.models.logModel import LogModel
-    from app.models.fatherModel import FatherModel
     from app.models.childrenModel import ChildrenModel
+    from app.models.fatherModel import FatherModel
+    from app.models.logModel import LogModel
 
 
 db = CustomSQLAlchemy()

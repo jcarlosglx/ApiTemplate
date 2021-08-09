@@ -1,6 +1,6 @@
 from app.commands.baseCommand import BaseCommand
-from app.helpers.records.deleteRecords import delete_records
 from app.entryApp import check_connection_db
+from app.helpers.records.deleteRecords import delete_records
 
 
 class DeleteData(BaseCommand):

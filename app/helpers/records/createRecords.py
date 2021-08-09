@@ -1,9 +1,10 @@
-from app.models.logModel import LogModel
-from app.models.fatherModel import FatherModel
-from app.models.childrenModel import ChildrenModel
-from app.helpers.records.dummyRecords import get_dummy_record
 from typing import NoReturn
+
+from app.helpers.records.dummyRecords import get_dummy_record
+from app.models.childrenModel import ChildrenModel
 from app.models.entryORM import db
+from app.models.fatherModel import FatherModel
+from app.models.logModel import LogModel
 
 
 def create_records(size: int) -> NoReturn:

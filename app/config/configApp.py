@@ -1,6 +1,6 @@
-from os import environ
 from dataclasses import dataclass
-from app.config.configDB import DBConfig, DBDevConfig, DBDeployConfig
+
+from app.config.configDB import DBConfig, DBDeployConfig, DBDevConfig
 
 
 @dataclass

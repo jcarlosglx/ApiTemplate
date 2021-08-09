@@ -1,9 +1,6 @@
-from app.helpers.records.createRecords import create_records
-from app.entryApp import (
-    get_config_db,
-    check_connection_db,
-)
 from app.commands.baseCommand import BaseCommand
+from app.entryApp import check_connection_db, get_config_db
+from app.helpers.records.createRecords import create_records
 from app.models.entryORM import db, load_models
 
 

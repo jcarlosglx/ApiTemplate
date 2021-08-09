@@ -1,7 +1,7 @@
 from flask import Blueprint, Response
-from app.controllers.databaseController import DatabaseController
-from app.config.configEndpoint import EndpointConfig
 
+from app.config.configEndpoint import EndpointConfig
+from app.controllers.databaseController import DatabaseController
 
 database_blueprint = Blueprint("database", __name__)
 endpoint_create = EndpointConfig.endpoint_database_create

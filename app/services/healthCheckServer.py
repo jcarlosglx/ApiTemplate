@@ -1,13 +1,15 @@
-import requests
 import atexit
 from typing import NoReturn
-from flask import Flask
+
+import requests
 from apscheduler.schedulers.background import BackgroundScheduler
-from app.messages.statusMessages import STATUS_200
-from app.models.logModel import LogModel
-from app.entryApp import get_config_server
+from flask import Flask
+
 from app.config.configEndpoint import EndpointConfig
+from app.entryApp import get_config_server
+from app.messages.statusMessages import STATUS_200
 from app.models.entryORM import db
+from app.models.logModel import LogModel
 
 
 class HealthCheckServer:

@@ -1,10 +1,11 @@
-from app.commands.baseCommand import BaseCommand
-from app.entryApp import check_connection_db, get_config_server, get_config_db
-from app.helpers.records.deleteRecords import delete_records
-from app.services.testServer import TestServer
-from app.helpers.records.createRecords import create_records
-from app.models.entryORM import load_models, db
 from os import system as system_command
+
+from app.commands.baseCommand import BaseCommand
+from app.entryApp import check_connection_db, get_config_db, get_config_server
+from app.helpers.records.createRecords import create_records
+from app.helpers.records.deleteRecords import delete_records
+from app.models.entryORM import db, load_models
+from app.services.testServer import TestServer
 
 
 class RunTests(BaseCommand):

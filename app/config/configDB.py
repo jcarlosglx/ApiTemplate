@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from os import environ
-from os.path import join, abspath, dirname
+from os.path import abspath, dirname, join
 
 base_dir = abspath(dirname(__file__))
 base_db = join(base_dir, "devDB.db")

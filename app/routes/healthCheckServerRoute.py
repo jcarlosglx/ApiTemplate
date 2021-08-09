@@ -1,7 +1,8 @@
 from flask import Blueprint, Response
-from app.controllers.healthCheckServerController import HealthCheckServerController
-from app.config.configEndpoint import EndpointConfig
 
+from app.config.configEndpoint import EndpointConfig
+from app.controllers.healthCheckServerController import \
+    HealthCheckServerController
 
 health_check_server_blueprint = Blueprint("health_check_server", __name__)
 endpoint = EndpointConfig.endpoint_health_check_server

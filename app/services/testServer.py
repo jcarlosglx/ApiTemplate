@@ -1,8 +1,9 @@
-from platform import system as system_platform
 from pathlib import Path
+from platform import system as system_platform
 from subprocess import Popen
 from time import sleep
 from typing import Type
+
 
 class TestServer:
     def __init__(self, time_wake_sec: int):

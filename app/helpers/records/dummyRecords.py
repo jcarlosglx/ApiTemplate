@@ -1,6 +1,8 @@
 from datetime import datetime
-from sqlalchemy import DateTime, Integer, Float, String, Boolean
 from typing import Type
+
+from sqlalchemy import Boolean, DateTime, Float, Integer, String
+
 from app.models.entryORM import db
 
 

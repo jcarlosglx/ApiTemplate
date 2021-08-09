@@ -1,7 +1,8 @@
+from flask import Response
+
 from app.messages.returnMessages import MessageReturn
 from app.messages.statusMessages import STATUS_200
 from app.messages.successMessages import SUCCESS_HEALTH_CHECK_SERVER
-from flask import Response
 
 
 class HealthCheckServerController:

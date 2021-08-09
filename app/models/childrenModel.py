@@ -1,4 +1,5 @@
 from sqlalchemy_serializer import SerializerMixin
+
 from app.models.entryORM import db
 
 

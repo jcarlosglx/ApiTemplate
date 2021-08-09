@@ -1,10 +1,12 @@
-from app.entryApp import create_app, check_connection_db
-from app.routes.blueprints import load_blueprints
-from flask import Flask
-import pytest
 from typing import Type
+
+import pytest
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from app.models.entryORM import load_models, CustomSQLAlchemy
+
+from app.entryApp import check_connection_db, create_app
+from app.models.entryORM import CustomSQLAlchemy, load_models
+from app.routes.blueprints import load_blueprints
 
 
 @pytest.fixture(scope="session")

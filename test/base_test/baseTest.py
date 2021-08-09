@@ -1,10 +1,13 @@
-from marshmallow import Schema
-from app.messages.statusMessages import STATUS_200
-from test.helpers.dummy_json_test.dummy_json_test import get_dummy_json_test
 from test.config.configTest import ConfigTest
-from flask_sqlalchemy import SQLAlchemy
+from test.helpers.dummy_json_test.dummy_json_test import get_dummy_json_test
 from typing import Type
+
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from marshmallow import Schema
+
+from app.messages.statusMessages import STATUS_200
+
 
 class BaseGetIndividualTest:
     expect_status_get: str = STATUS_200
@@ -14,9 +17,14 @@ class BaseGetIndividualTest:
     response_key: str = ConfigTest.response_key
 
     def test_get_individual(self, get_app: Flask, get_db: Type[SQLAlchemy]):
-        response = get_app.test_client().get(f"{self.url_get}{self.endpoint_get}/{self.id_get}")
+        response = get_app.test_client().get(
+            f"{self.url_get}{self.endpoint_get}/{self.id_get}"
+        )
         code_response = response.get_json()[self.response_key]
-        assert code_response == self.expect_status_get, f"Expected {self.expect_status_get} got {code_response}"
+        assert (
+            code_response == self.expect_status_get
+        ), f"Expected {self.expect_status_get} got {code_response}"
+
 
 class BaseGetGeneralTest:
     expect_status_get: str = STATUS_200
@@ -27,7 +35,9 @@ class BaseGetGeneralTest:
     def test_get_general(self, get_app: Flask, get_db: Type[SQLAlchemy]):
         response = get_app.test_client().get(f"{self.url_get}{self.endpoint_get}")
         code_response = response.get_json()[self.response_key]
-        assert code_response == self.expect_status_get, f"Expected {self.expect_status_get} got {code_response}"
+        assert (
+            code_response == self.expect_status_get
+        ), f"Expected {self.expect_status_get} got {code_response}"
 
 
 class BaseDeleteTest:
@@ -38,10 +48,14 @@ class BaseDeleteTest:
     response_key: str = ConfigTest.response_key
 
     def test_delete(self, get_app: Flask, get_db: Type[SQLAlchemy]):
-        response = get_app.test_client().delete(f"{self.url_delete}{self.endpoint_delete}/{self.id_delete}")
+        response = get_app.test_client().delete(
+            f"{self.url_delete}{self.endpoint_delete}/{self.id_delete}"
+        )
         code_response = response.get_json()[self.response_key]
         print(response.get_json())
-        assert code_response == self.expect_status_delete, f"Expected {self.expect_status_delete} got {code_response}"
+        assert (
+            code_response == self.expect_status_delete
+        ), f"Expected {self.expect_status_delete} got {code_response}"
 
 
 class BasePostTest:
@@ -54,10 +68,16 @@ class BasePostTest:
     def test_post(self, get_app: Flask, get_db: Type[SQLAlchemy]):
         json_data = get_dummy_json_test(self.schema_post)
         print(json_data)
-        response = get_app.test_client().post(f"{self.url_post}{self.endpoint_post}", json=json_data, follow_redirects=True)
+        response = get_app.test_client().post(
+            f"{self.url_post}{self.endpoint_post}",
+            json=json_data,
+            follow_redirects=True,
+        )
         code_response = response.get_json()[self.response_key]
         print(response.get_json())
-        assert code_response == self.expect_status_post, f"Expected {self.expect_status_post} got {code_response}"
+        assert (
+            code_response == self.expect_status_post
+        ), f"Expected {self.expect_status_post} got {code_response}"
 
 
 class BasePatchTest:
@@ -70,9 +90,13 @@ class BasePatchTest:
 
     def test_patch(self, get_app: Flask, get_db: Type[SQLAlchemy]):
         json_data = get_dummy_json_test(self.schema_patch)
-        response = get_app.test_client().patch(f"{self.url_patch}{self.endpoint_patch}/{self.id_patch}", json=json_data)
+        response = get_app.test_client().patch(
+            f"{self.url_patch}{self.endpoint_patch}/{self.id_patch}", json=json_data
+        )
         code_response = response.get_json()[self.response_key]
-        assert code_response == self.expect_status_patch, f"Expected {self.expect_status_patch} got {code_response}"
+        assert (
+            code_response == self.expect_status_patch
+        ), f"Expected {self.expect_status_patch} got {code_response}"
 
 
 class BasePutTest:
@@ -85,7 +109,10 @@ class BasePutTest:
 
     def test_put(self, get_app: Flask, get_db: Type[SQLAlchemy]):
         json_data = get_dummy_json_test(self.schema_put)
-        response = get_app.test_client().put(f"{self.url_put}{self.endpoint_put}/{self.id_put}", json=json_data)
+        response = get_app.test_client().put(
+            f"{self.url_put}{self.endpoint_put}/{self.id_put}", json=json_data
+        )
         code_response = response.get_json()[self.response_key]
-        assert code_response == self.expect_status_put, f"Expected {self.expect_status_put} got {code_response}"
-
+        assert (
+            code_response == self.expect_status_put
+        ), f"Expected {self.expect_status_put} got {code_response}"

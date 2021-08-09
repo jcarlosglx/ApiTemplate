@@ -1,7 +1,8 @@
-from typing import Dict, Type
-from string import ascii_uppercase, digits
 from datetime import datetime
-from random import randint, random, choices
+from random import choices, randint, random
+from string import ascii_uppercase, digits
+from typing import Dict, Type
+
 from marshmallow import Schema
 
 
