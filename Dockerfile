@@ -3,6 +3,7 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONBUFFERED 1
 COPY . /app
+RUN pip3 install -r requeriments.txt
 EXPOSE 8080
-RUN chmod +x gunicorn_server.sh
-ENTRYPOINT ["./gunicorn_server.sh"]
+RUN chmod +x start_gunicorn.sh
+ENTRYPOINT ["./start_gunicorn.sh"]
