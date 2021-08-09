@@ -1,4 +1,3 @@
-from requests import get, post, patch, delete, put
 from marshmallow import Schema
 from app.messages.statusMessages import STATUS_200
 from test.helpers.dummy_json_test.dummy_json_test import get_dummy_json_test
@@ -7,14 +6,25 @@ from flask_sqlalchemy import SQLAlchemy
 from typing import Type
 from flask import Flask
 
+class BaseGetIndividualTest:
+    expect_status_get: str = STATUS_200
+    url_get: str = ConfigTest.URL
+    endpoint_get: str
+    id_get: int = 1
+    response_key: str = ConfigTest.response_key
 
-class BaseGetTest:
+    def test_get_individual(self, get_app: Flask, get_db: Type[SQLAlchemy]):
+        response = get_app.test_client().get(f"{self.url_get}{self.endpoint_get}/{self.id_get}")
+        code_response = response.get_json()[self.response_key]
+        assert code_response == self.expect_status_get, f"Expected {self.expect_status_get} got {code_response}"
+
+class BaseGetGeneralTest:
     expect_status_get: str = STATUS_200
     url_get: str = ConfigTest.URL
     endpoint_get: str
     response_key: str = ConfigTest.response_key
 
-    def test_get(self, get_app: Flask, get_db: Type[SQLAlchemy]):
+    def test_get_general(self, get_app: Flask, get_db: Type[SQLAlchemy]):
         response = get_app.test_client().get(f"{self.url_get}{self.endpoint_get}")
         code_response = response.get_json()[self.response_key]
         assert code_response == self.expect_status_get, f"Expected {self.expect_status_get} got {code_response}"

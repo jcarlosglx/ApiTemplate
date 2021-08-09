@@ -20,7 +20,7 @@ def get_db(get_app: Flask) -> Type[SQLAlchemy]:
         load_blueprints(get_app)
         is_alive_db = check_connection_db()
         if is_alive_db:
-            db = CustomSQLAlchemy
+            db = CustomSQLAlchemy()
             yield db
         else:
             print("Unable to connect with teh dabase")
