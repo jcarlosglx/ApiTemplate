@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-rest-service
+spec:
+  selector:
+    app: flask-rest
+  ports:
+    - protocol: "TCP"
+      port: 6000
+      targetPort: 8080
+    type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-rest
+spec:
+  selector:
+    matchLabels:
+      app: flask-rest
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: flask-rest
+    spec:
+      containers:
+        - name: flask-rest
+          image: flask-rest:lastest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080

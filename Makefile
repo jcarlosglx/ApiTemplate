@@ -5,10 +5,14 @@ help:
 	@awk 'BEGIN {FS = ":"} /^[a-zA-Z]+:.*?## / {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' ${MAKEFILE_LIST}
 
 .PHONY: test
-test: ## Start the test's task
+testApp: ## Start the suit of test for the app
 	@coverage run -m pytest test/
 	@coverage html -d report_html
 	@coverage report
+
+.PHONY: upApp
+upApp: ## Star the app
+	@python main.py run_server
 
 .PHONY: style
 style: ## Clean the code with black and isort
@@ -21,8 +25,8 @@ style: ## Clean the code with black and isort
 
 .PHONY: upDocker
 upDocker: ## Start a docker container(s)
-	@docker build . -t app/flask
-	@docker run -dp 8080:8080 app/flask
+	@docker build -f Dockerfile -t flask-rest .
+	@docker run -dp 8080:8080 flask-rest
 
 .PHONY: stopDocker
 stopDocker: ## Stop a docker container(s)
