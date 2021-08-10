@@ -6,4 +6,4 @@ COPY . /app
 RUN pip3 install -r requeriments.txt
 EXPOSE 8080
 RUN chmod +x start_gunicorn.sh
-ENTRYPOINT ["./start_gunicorn.sh"]
+ENTRYPOINT ["sh", "./start_gunicorn.sh"]

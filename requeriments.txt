@@ -1,13 +1,3 @@
-# Base requirements
-black
-coverage
-flake8
-gunicorn
-isort
-pre-commit
-pytest
-pytest-cov
-
 # Project requirements
 flask==1.1.4
 flask-sqlalchemy
@@ -17,3 +7,13 @@ requests
 psycopg2-binary
 SQLAlchemy-serializer
 apscheduler
+
+# Base requirements
+black
+coverage
+flake8
+gunicorn
+isort
+pre-commit
+pytest
+pytest-cov
