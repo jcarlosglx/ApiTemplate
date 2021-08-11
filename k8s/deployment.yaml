@@ -6,10 +6,11 @@ spec:
   selector:
     app: flask-rest
   ports:
-    - protocol: "TCP"
-      port: 6000
-      targetPort: 8080
-    type: LoadBalancer
+  - protocol: "TCP"
+    port: 8080
+    targetPort: 8080
+  type: LoadBalancer
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -19,15 +20,15 @@ spec:
   selector:
     matchLabels:
       app: flask-rest
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
         app: flask-rest
     spec:
       containers:
-        - name: flask-rest
-          image: flask-rest:lastest
-          imagePullPolicy: Never
-          ports:
-            - containerPort: 8080
+      - name: flask-rest
+        image: flask-rest:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080

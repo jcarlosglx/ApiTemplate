@@ -25,8 +25,12 @@ style: ## Clean the code with black and isort
 
 .PHONY: upDocker
 upDocker: ## Start a docker container(s)
-	@docker build -f Dockerfile -t flask-rest .
-	@docker run -dp 8080:8080 flask-rest
+	@docker build -f Dockerfile -t flask-rest:latest .
+	@docker run -dp 8080:8080 flask-rest:latest
+
+.PHONY: imgDocker
+imgDocker: ## Create only the docker img
+	@docker build -f Dockerfile -t flask-rest:latest .
 
 .PHONY: stopDocker
 stopDocker: ## Stop a docker container(s)
@@ -36,3 +40,19 @@ stopDocker: ## Stop a docker container(s)
 delDocker: ## WARNING! Delete all docker container(s)
 	@docker stop $$(docker container ls -aq)
 	@docker container rm $$(docker container ls -aq)
+
+.PHONY: upK8s
+upK8s: ## Star a K8s pod (test/dev only)
+	@kubectl apply -f k8s/deployment.yaml
+
+.PHONY: delK8s
+delK8s: ## Delete a K8s pod
+	@kubectl delete -f k8s/deployment.yaml
+
+.PHNOY: upMini
+upMini: ## Start the Minikube Cluster
+	@minikube start --driver=docker
+
+.PHONY: delMini
+delMini: ## WARNING! Delete the Minikube Cluster
+	@minikube delete
