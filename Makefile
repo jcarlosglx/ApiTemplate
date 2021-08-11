@@ -1,7 +1,7 @@
 .DEFAULT_GOLA := help
 
 .PHONY: help
-help:
+help: ## Show all the commands
 	@awk 'BEGIN {FS = ":"} /^[a-zA-Z]+:.*?## / {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' ${MAKEFILE_LIST}
 
 .PHONY: test
@@ -56,3 +56,7 @@ upMini: ## Start the Minikube Cluster
 .PHONY: delMini
 delMini: ## WARNING! Delete the Minikube Cluster
 	@minikube delete
+
+.PHONY: dabodMini
+daboMini: ## Show the dashboard of Minikube Cluster
+	@minikube dashboard
