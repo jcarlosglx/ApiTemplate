@@ -52,9 +52,11 @@ delK8s: ## Delete a K8s pod
 .PHNOY: upMini
 upMini: ## Start the Minikube Cluster
 	@minikube start --driver=docker
+	@eval $$(minikube docker-env)
 
 .PHONY: delMini
 delMini: ## WARNING! Delete the Minikube Cluster
+	@minikube stop
 	@minikube delete
 
 .PHONY: dabodMini
