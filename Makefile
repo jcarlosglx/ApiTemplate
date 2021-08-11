@@ -53,6 +53,8 @@ delK8s: ## Delete a K8s pod
 upMini: ## Start the Minikube Cluster
 	@minikube start --driver=docker
 	@eval $$(minikube docker-env)
+	@docker build -f Dockerfile -t flask-rest:latest .
+	@kubectl apply -f k8s/deployment.yaml
 
 .PHONY: delMini
 delMini: ## WARNING! Delete the Minikube Cluster
